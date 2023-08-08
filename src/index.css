@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-control {
+    @apply bg-white ring-1 rounded-md mt-3 focus:ring-green-500 focus:border-blue-500 block w-full p-2.5 border-gray-100 placeholder-gray-400 text-slate-800;
+  }
+  .navbar {
+    @apply w-[270px] flex flex-col h-screen overflow-hidden border-r-[1.125px] border-r-slate-200;
+  }
+  .btn {
+    @apply focus:outline-none text-white focus:ring-2 font-medium rounded-lg text-sm px-6 w-[50%] py-2.5 mr-2 mb-2 capitalize;
+  }
+  .bg-dashboard {
+    @apply flex flex-col w-max px-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-green-50 to-emerald-100;
+  }
+  .card-header {
+    @apply flex flex-row justify-between items-center px-4 pb-2 mb-3 border-b-[1px] border-slate-200;
+  }
+  .btn-success {
+    @apply flex flex-row gap-3 px-4 py-2.5 uppercase text-sm font-semibold ring-1 ring-green-400 bg-green-700 focus:ring-green-600 rounded-md text-white;
+  }
+  .tb-row {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600;
+  }
+  .tb-head {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+  }
+  .form-control {
+    @apply bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 focus:bg-green-50 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  }
+  .nav-item{
+    @apply py-4 px-4 flex flex-row items-center flex-wrap gap-3 my-0 border-b-[1px] cursor-pointer hover:bg-gradient-to-l from-green-200 to-green-400;
+  }
+}
+
+.background-img {
+  height: 100vh;
+  overflow: hidden;
+  background-size: 800px auto;
+  background-position: center;
+  background-image: url("./assets/updated-bg.jpeg");
+  background-repeat: no-repeat;
+}
