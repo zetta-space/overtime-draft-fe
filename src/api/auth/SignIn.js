@@ -1,4 +1,6 @@
-export const SignIn = async (username, password) => {
+import { uri } from "../../routes/url.routes";
+
+const SignIn = async (username, password) => {
   const requestBody = {
     method: "POST",
     headers: {
@@ -9,10 +11,12 @@ export const SignIn = async (username, password) => {
   };
 
   const request = await fetch(
-    "http://127.0.0.1:8000/api/user/login",
+    `${uri.BASE_URL}/api/user/login`,
     requestBody
   );
   const response = await request.json();
 
   return response;
 };
+
+export default SignIn;
