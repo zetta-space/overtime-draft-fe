@@ -3,19 +3,24 @@ import {
   BellIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import Profile from "../components/ui/Profile";
+// import Profile from "../components/ui/Profile";
 import Table from "../components/ui/Table";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Slider from "../components/Slider";
 import { UserContext } from "../state/UserContext";
+import { OvertimeList } from "../api/overtime/OvertimeList";
+import Spinner from "../components/ui/Spinner";
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
+  const [list, setList] = useState(null);
+  const TOKEN = "86|jV4r5Ta6H3qvpqR2bvthblLGwTFLFcSJsl8iPYq6";
 
   useEffect(() => {
-    console.log(user);
-    // const list = OvertimeList(10, 0);
-    // list.then(({ data }) => setOvertime(data));
+    const overtime = OvertimeList(10, 0, TOKEN);
+    overtime.then(({ data }) => {
+      setList(data);
+    });
   }, []);
 
   return (
@@ -32,9 +37,7 @@ const Dashboard = () => {
             <span>
               <BellIcon className="w-6 h-auto text-slate-500" />
             </span>
-            <span>
-              {/* <Profile /> */}
-            </span>
+            <span>{/* <Profile /> */}</span>
           </div>
         </div>
         <div className="flex flex-col bg-white rounded-md p-5 mx-4 relative top-10 border-[0.75px] border-slate-300">
@@ -67,7 +70,7 @@ const Dashboard = () => {
             </div>
           </div>
           <section className="w-full my-4 flex flex-col">
-            <Table />
+            {list === null ? <Spinner /> : <Table overtimeRecordList={list} />}
           </section>
         </div>
       </div>
