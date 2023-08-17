@@ -21,6 +21,7 @@ const Dashboard = () => {
     overtime.then(({ data }) => {
       setList(data);
     });
+  }, []);
 
   return (
     <div className="flex flex-row w-full">
