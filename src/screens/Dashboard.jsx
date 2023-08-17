@@ -5,17 +5,18 @@ import {
 } from "@heroicons/react/24/outline";
 import Profile from "../components/ui/Profile";
 import Table from "../components/ui/Table";
-import { useEffect, useState } from "react";
-import { OvertimeList } from "../api/overtime/OvertimeList";
+import { useContext, useEffect } from "react";
 import Slider from "../components/Slider";
+import { UserContext } from "../state/UserContext";
 
 const Dashboard = () => {
-  const [overtime, setOvertime] = useState(null);
+  const { user } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   const list = OvertimeList(10, 0);
-  //   list.then(({ data }) => setOvertime(data));
-  // }, []);
+  useEffect(() => {
+    console.log(user);
+    // const list = OvertimeList(10, 0);
+    // list.then(({ data }) => setOvertime(data));
+  }, []);
 
   return (
     <div className="flex flex-row w-full">
@@ -32,7 +33,7 @@ const Dashboard = () => {
               <BellIcon className="w-6 h-auto text-slate-500" />
             </span>
             <span>
-              <Profile />
+              {/* <Profile /> */}
             </span>
           </div>
         </div>

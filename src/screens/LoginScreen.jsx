@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
-import { SignIn } from "../api/auth/SignIn";
+import SignIn from "../api/auth/SignIn";
 import Profile from "../components/ui/Profile";
 import { UserContext } from "../state/UserContext";
 import AlertDanger from "../components/AlertDanger";
+import { redirect, useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
@@ -11,23 +12,28 @@ const LoginScreen = () => {
   const [error, setError] = useState(null);
 
   const { getUser, user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const authentication = () => {
     const response = SignIn(username, password);
 
-    response.then(({ message, status_code, data }) => {
-      status_code === 401
-        ? setError(message)
-        : getUser({
-            token: data.token,
-            username: data.user.username,
-            name: data.user.name,
-            email: data.user.email,
-          });
-    });
+    response
+      .then(({ message, status_code, data }) => {
+        status_code === 401
+          ? setError(message)
+          : getUser({
+              token: data.token,
+              username: data.user.username,
+              name: data.user.name,
+              email: data.user.email,
+            });
+      })
+      .then(() => navigation());
+  };
 
+  const navigation = () => {
     user.length > 0
-      ? null
+      ? navigate("/dashboard/index")
       : setTimeout(() => {
           setError(null);
         }, 3500);
@@ -69,7 +75,7 @@ const LoginScreen = () => {
               <button
                 type="button"
                 className="btn btn-success mt-3"
-                onClick={authentication}
+                onClick={() => authentication()}
               >
                 continue
               </button>
@@ -77,11 +83,7 @@ const LoginScreen = () => {
           </form>
         </div>
       </div>
-      <div className="w-9/12 background-img">
-        <div className="flex w-full flex-row justify-end items-center">
-          <Profile userData={user} />
-        </div>
-      </div>
+      <div className="w-9/12 background-img"></div>
     </div>
   );
 };

@@ -1,10 +1,15 @@
+import { useState } from "react";
+import { SignOut } from "../../api/auth/SignOut";
+import { redirect } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
-const Profile = () => {
-  // const { username, name, email } = userData;
-  const ADMIN = "Admin";
+const Profile = ({ userData }) => {
+  const { username, name, email, token } = userData[0];
+  const [authMsg, setAuthMsg] = useState(null);
 
   return (
     <div>
+      {authMsg !== null ? redirect("/") : null}
       <button
         data-popover-target="popover-user-profile"
         data-popover-placement="bottom"
@@ -12,7 +17,7 @@ const Profile = () => {
       >
         <img
           className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-          src={`https://api.dicebear.com/6.x/initials/svg?seed=${ADMIN}`}
+          src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`}
           alt="Bordered avatar"
         />
       </button>
@@ -29,19 +34,25 @@ const Profile = () => {
               <button
                 type="button"
                 className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5"
+                onClick={() => {
+                  const response = SignOut(token);
+                  response.then(({ message }) => {
+                    setAuthMsg(message);
+                  });
+                }}
               >
                 Sign Out
               </button>
             </div>
           </div>
           <p className="text-base font-semibold leading-none text-gray-900 dark:text-white">
-            name
+            {name}
           </p>
-          <p className="mb-3 text-sm font-normal">@username</p>
+          <p className="mb-3 text-sm font-normal">@{username}</p>
           <p className="mb-4 text-sm">
             Manager of Hayleays
             <br />
-            <span className="text-blue-600 dark:text-blue-500">email</span>.
+            <span className="text-blue-600 dark:text-blue-500">{email}</span>.
           </p>
           <ul className="flex text-sm">
             <li className="mr-2">
