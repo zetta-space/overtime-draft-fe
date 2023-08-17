@@ -21,7 +21,6 @@ const Dashboard = () => {
     overtime.then(({ data }) => {
       setList(data);
     });
-  }, []);
 
   return (
     <div className="flex flex-row w-full">
@@ -37,7 +36,6 @@ const Dashboard = () => {
             <span>
               <BellIcon className="w-6 h-auto text-slate-500" />
             </span>
-            <span>{/* <Profile /> */}</span>
           </div>
         </div>
         <div className="flex flex-col bg-white rounded-md p-5 mx-4 relative top-10 border-[0.75px] border-slate-300">
