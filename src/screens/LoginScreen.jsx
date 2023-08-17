@@ -15,6 +15,8 @@ const LoginScreen = () => {
   const navigate = useNavigate();
 
   const authentication = () => {
+    /**
+     * 
     const response = SignIn(username, password);
 
     response
@@ -37,6 +39,8 @@ const LoginScreen = () => {
       : setTimeout(() => {
           setError(null);
         }, 3500);
+  */
+    return navigate("/dashboard/index");
   };
 
   return (

@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-const Table = () => {
-  const id = 1;
+const Table = ({ overtimeRecordList }) => {
+  const { data } = overtimeRecordList;
+  console.log(data);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -31,31 +33,45 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="tb-row">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              <Link to={`/employee/${id}`}>Apple MacBook Pro 17</Link>
-            </th>
-            <td className="px-6 py-4">113</td>
-            <td className="px-6 py-4">AL_Rolling</td>
-            <td className="px-6 py-4">FCAA</td>
-            <td className="px-6 py-4">2hrs</td>
-            <td className="px-6 py-4">$2999.35</td>
-            <td className="px-6 py-4 text-right">
-              <button
-                type="button"
-                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                data-drawer-target="drawer-right"
-                data-drawer-show="drawer-right"
-                data-drawer-placement="right"
-                aria-controls="drawer-right"
-              >
-                Edit
-              </button>
-            </td>
-          </tr>
+          {data.map(
+            ({
+              id,
+              employee_id,
+              job,
+              name,
+              worked_at,
+              total,
+              hours_in_mins,
+            }) => {
+              return (
+                <tr className="tb-row" key={id}>
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    <Link to={`/employee/${id}`}>{name}</Link>
+                  </th>
+                  <td className="px-6 py-4">{employee_id}</td>
+                  <td className="px-6 py-4">{job}</td>
+                  <td className="px-6 py-4">{worked_at}</td>
+                  <td className="px-6 py-4">{hours_in_mins} mins</td>
+                  <td className="px-6 py-4">Rs. {total}</td>
+                  <td className="px-6 py-4 text-right">
+                    <button
+                      type="button"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      data-drawer-target="drawer-right"
+                      data-drawer-show="drawer-right"
+                      data-drawer-placement="right"
+                      aria-controls="drawer-right"
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              );
+            }
+          )}
         </tbody>
       </table>
     </div>

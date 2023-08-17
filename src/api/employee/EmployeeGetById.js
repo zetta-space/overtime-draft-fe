@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const GetEmployeeByIdAsync = async (id, token) => {
   const bearerToken = "Bearer " + String(token);
 
@@ -16,4 +18,6 @@ export const GetEmployeeByIdAsync = async (id, token) => {
   const result = await request.json();
 
   return result;
+
+  // const result = axios.get()
 };
