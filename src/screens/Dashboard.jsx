@@ -14,7 +14,7 @@ import Spinner from "../components/ui/Spinner";
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [list, setList] = useState(null);
-  const TOKEN = "86|jV4r5Ta6H3qvpqR2bvthblLGwTFLFcSJsl8iPYq6";
+  const TOKEN = "87|zgBuCJVPMLDDmjP881H0Fg6uNoFWTr5QbAsIJ1Qi";
 
   useEffect(() => {
     const overtime = OvertimeList(10, 0, TOKEN);
@@ -68,9 +68,7 @@ const Dashboard = () => {
               <Slider heading={"Add Overtime Record"} />
             </div>
           </div>
-          <section className="w-full my-4 flex flex-col">
-            {list === null ? <Spinner /> : <Table overtimeRecordList={list} />}
-          </section>
+          {list === null ? <Spinner /> : <Table overtimeRecordList={list} />}
         </div>
       </div>
     </div>

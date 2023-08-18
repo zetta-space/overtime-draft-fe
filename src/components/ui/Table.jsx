@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
+import Button from "../Button";
 
 const Table = ({ overtimeRecordList }) => {
   const { data } = overtimeRecordList;
-  console.log(data);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

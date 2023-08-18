@@ -8,6 +8,8 @@ import Dashboard from "./screens/Dashboard.jsx";
 import Error from "./screens/Error.jsx";
 import Employee from "./screens/Employee.jsx";
 import Root from "./routes/Root.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +33,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <UserProvider>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   </UserProvider>
 );
